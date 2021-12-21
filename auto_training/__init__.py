@@ -1,3 +1,4 @@
+import os
 from math import inf
 import numpy as np
 import schedule
@@ -47,7 +48,6 @@ class AutoTraining:
     self.__counter_new_data = 0
     self.__istraining = False
     self.__mem_called_read_data = False
-        
     # Khởi tạo sự kiện huấn luyện mô hình
     schedule.every().sunday.at("12:00:00").do(self.__training, args=(epochs, batch_size)).tag("DEFAULT_EVENT")
               
@@ -141,7 +141,7 @@ class AutoTraining:
       
       self.__counter_new_data += 1
       self.data.write_data(temp, self.file_saved, self.callback_write_data)
-      
+    
   def update_label(self, id_ : str, label : np.ndarray):
     if isinstance(id_, str) == False:
       raise ValueError("id must be str")
